@@ -29,4 +29,13 @@ G4bool MySensitiveDetector::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhis
     G4ThreeVector posDetector = physVol->GetTranslation();
     
     G4cout << "Detector position: " << posDetector << G4endl;
+    
+    G4int evt = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
+    
+    G4AnalysisManager *man = G4AnalysisManager::Instance();
+    man->FillNtupleIColumn(0, evt);
+    man->FillNtupleDColumn(1, posDetector[0]);
+    man->FillNtupleDColumn(2, posDetector[1]);
+    man->FillNtupleDColumn(3, posDetector[2]);
+    man->AddNtupleRow(0);
 }
