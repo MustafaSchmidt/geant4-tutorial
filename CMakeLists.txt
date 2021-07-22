@@ -12,4 +12,9 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/*.hh)
 add_executable(sim sim.cc ${sources} ${headers})
 target_link_libraries(sim ${Geant4_LIBRARIES})
 
+file(GLOB MACRO_FILES
+  "*.mac"
+)
+file(COPY ${MACRO_FILES} DESTINATION ${PROJECT_BINARY_DIR})
+
 add_custom_target(Simulation DEPENDS sim)

@@ -1,0 +1,6 @@
+/gun/momentumAmp 0.5 GeV
+/run/beamOn 100
+/gun/momentumAmp 1 GeV
+/run/beamOn 100
+/gun/momentumAmp 10 GeV
+/run/beamOn 100
