@@ -35,10 +35,7 @@ void MyDetectorConstruction::DefineMaterials()
     Aerogel->AddMaterial(SiO2, 62.5*perCent);
     Aerogel->AddMaterial(H2O, 37.4*perCent);
     Aerogel->AddElement(C, 0.1*perCent);
-}
 
-G4VPhysicalVolume *MyDetectorConstruction::Construct()
-{    
     G4double energy[2] = {1.239841939*eV/0.2, 1.239841939*eV/0.9};
     G4double rindexAerogel[2] = {1.1, 1.1};
     G4double rindexWorld[2] = {1.0, 1.0};
@@ -52,7 +49,10 @@ G4VPhysicalVolume *MyDetectorConstruction::Construct()
     mptWorld->AddProperty("RINDEX", energy, rindexWorld, 2);
     
     worldMat->SetMaterialPropertiesTable(mptWorld);
-    
+}
+
+G4VPhysicalVolume *MyDetectorConstruction::Construct()
+{    
     G4double xWorld = 0.5*m;
     G4double yWorld = 0.5*m;
     G4double zWorld = 0.5*m;
