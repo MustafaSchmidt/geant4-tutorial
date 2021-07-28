@@ -2,8 +2,8 @@
 
 MyDetectorConstruction::MyDetectorConstruction()
 {
-    nCols = 100;
-    nRows = 100;
+    nCols = 10;
+    nRows = 10;
     
     fMessenger = new G4GenericMessenger(this, "/detector/", "Detector Construction");
     

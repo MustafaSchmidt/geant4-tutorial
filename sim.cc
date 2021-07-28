@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "G4RunManager.hh"
+#include "G4MTRunManager.hh"
 #include "G4UImanager.hh"
 #include "G4VisManager.hh"
 #include "G4VisExecutive.hh"
@@ -14,13 +15,15 @@ int main(int argc, char** argv)
 {
     G4UIExecutive* ui = 0;
     
-    G4RunManager *runManager = new G4RunManager();
+    #ifdef G4MULTITHREADED
+      G4MTRunManager* runManager = new G4MTRunManager;
+    #else
+      G4RunManager* runManager = new G4RunManager;
+    #endif
     
     runManager->SetUserInitialization(new MyDetectorConstruction());
     runManager->SetUserInitialization(new MyPhysicsList());
     runManager->SetUserInitialization(new MyActionInitialization());
-    
-    runManager->Initialize();
 
     if (argc == 1)
     {
