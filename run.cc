@@ -3,13 +3,21 @@
 MyRunAction::MyRunAction()
 {
     G4AnalysisManager *man = G4AnalysisManager::Instance();
+
+    man->CreateNtuple("Photons", "Photons");
+    man->CreateNtupleIColumn("fEvent");
+    man->CreateNtupleDColumn("fX");
+    man->CreateNtupleDColumn("fY");
+    man->CreateNtupleDColumn("fZ");
+    man->CreateNtupleDColumn("fWlen");
+    man->FinishNtuple(0);
     
     man->CreateNtuple("Hits", "Hits");
     man->CreateNtupleIColumn("fEvent");
     man->CreateNtupleDColumn("fX");
     man->CreateNtupleDColumn("fY");
     man->CreateNtupleDColumn("fZ");
-    man->FinishNtuple(0);
+    man->FinishNtuple(1);
 }
 
 MyRunAction::~MyRunAction()

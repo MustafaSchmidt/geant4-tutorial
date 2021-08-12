@@ -17,4 +17,9 @@ file(GLOB MACRO_FILES
 )
 file(COPY ${MACRO_FILES} DESTINATION ${PROJECT_BINARY_DIR})
 
+file(GLOB DATA_FILES
+  "*.dat"
+)
+file(COPY ${DATA_FILES} DESTINATION ${PROJECT_BINARY_DIR})
+
 add_custom_target(Simulation DEPENDS sim)
