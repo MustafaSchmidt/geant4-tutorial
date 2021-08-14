@@ -3,6 +3,8 @@
 
 #include "G4UserRunAction.hh"
 #include "G4Run.hh"
+#include "G4Accumulable.hh"
+#include "G4AccumulableManager.hh"
 
 #include "g4root.hh"
 
@@ -14,6 +16,9 @@ public:
     
     virtual void BeginOfRunAction(const G4Run*);
     virtual void EndOfRunAction(const G4Run*);
+    
+private:
+    G4Accumulable<G4double> edep;
 };
 
 #endif

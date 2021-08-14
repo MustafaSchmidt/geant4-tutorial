@@ -116,4 +116,7 @@ void MyDetectorConstruction::ConstructSDandField()
     
     if(cherenkov)
     	logicDetector->SetSensitiveDetector(sensDet);
+    	
+    if(scintillator)
+    	logicScint->SetSensitiveDetector(sensDet);
 }
