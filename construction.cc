@@ -89,6 +89,8 @@ void MyDetectorConstruction::ConstructScintillator()
     logicScint = new G4LogicalVolume(solidScint, Aerogel, "logicalScint");
     
     physScint = new G4PVPlacement(0, G4ThreeVector(0., 0., 0.), logicScint, "physScint", logicWorld, false, 0, true);
+    
+    fScoringVolume = logicScint;
 }
 
 G4VPhysicalVolume *MyDetectorConstruction::Construct()
@@ -114,7 +116,4 @@ void MyDetectorConstruction::ConstructSDandField()
     
     if(cherenkov)
     	logicDetector->SetSensitiveDetector(sensDet);
-    	
-    if(scintillator)
-        logicScint->SetSensitiveDetector(sensDet);
 }

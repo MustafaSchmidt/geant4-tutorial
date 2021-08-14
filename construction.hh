@@ -24,6 +24,8 @@ public:
     
     virtual G4VPhysicalVolume *Construct();
     
+    G4LogicalVolume* GetScoringVolume() const { return fScoringVolume; }
+    
 private:
     G4Tubs *solidScint;
     G4Box *solidWorld, *solidRadiator, *solidDetector;
@@ -43,6 +45,8 @@ private:
     G4double xWorld, yWorld, zWorld;
     
     G4bool cherenkov, scintillator;
+    
+    G4LogicalVolume*  fScoringVolume;
 };
 
 #endif
