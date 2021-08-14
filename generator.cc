@@ -24,8 +24,8 @@ MyPrimaryGenerator::~MyPrimaryGenerator()
 
 void MyPrimaryGenerator::GeneratePrimaries(G4Event *anEvent)
 {
-    G4int Z = 9;
-    G4int A = 18;
+    G4int Z = 27;
+    G4int A = 60;
     G4double Q = 0.*eplus;
     G4double E = 0.*keV;
     
