@@ -7,6 +7,8 @@
 
 #include "g4root.hh"
 
+#include "hits.hh"
+
 class MySensitiveDetector : public G4VSensitiveDetector
 {
 public:
