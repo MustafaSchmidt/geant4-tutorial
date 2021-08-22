@@ -20,6 +20,8 @@ public:
     
     virtual G4VPhysicalVolume *Construct();
     
+    G4LogicalVolume* GetScoringVolume() const { return fScoringVolume; }
+    
 private:
     G4Box *solidWorld, *solidRadiator, *solidDetector;
     G4LogicalVolume *logicWorld, *logicRadiator, *logicDetector;
@@ -34,6 +36,8 @@ private:
     G4GenericMessenger *fMessenger;
     
     G4int nRows, nCols;
+    
+    G4LogicalVolume *fScoringVolume;
 };
 
 #endif

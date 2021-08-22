@@ -81,6 +81,8 @@ G4VPhysicalVolume *MyDetectorConstruction::Construct()
         }
     }
     
+    fScoringVolume = logicRadiator;
+    
     return physWorld;
 }
 
