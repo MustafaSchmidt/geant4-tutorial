@@ -13,7 +13,7 @@ public:
     int operator==(const MyHit &right) const;
     
     inline void *operator new(size_t);
-    inline void operator delete(void *aHit);
+    inline void operator delete(void *hit);
     
     virtual const std::map<G4String,G4AttDef>* GetAttDefs() const;
     virtual std::vector<G4AttValue>* CreateAttValues() const;
@@ -32,13 +32,13 @@ extern G4ThreadLocal G4Allocator<MyHit>* MyHitAllocator;
 
 inline void* MyHit::operator new(size_t)
 {
-  if (!MyHitAllocator) {
-       MyHitAllocator = new G4Allocator<MyHit>;
-  }
+    if (!MyHitAllocator)
+        MyHitAllocator = new G4Allocator<MyHit>;
+       
   return (void*)MyHitAllocator->MallocSingle();
 }
 
-inline void MyHit::operator delete(void* aHit)
+inline void MyHit::operator delete(void* hit)
 {
-  MyHitAllocator->FreeSingle((MyHit*) aHit);
+    MyHitAllocator->FreeSingle((MyHit*) hit);
 }
