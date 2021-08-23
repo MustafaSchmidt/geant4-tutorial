@@ -18,6 +18,8 @@ public:
     MyDetectorConstruction();
     ~MyDetectorConstruction();
     
+    G4LogicalVolume *GetScoringVolume() const { return fScoringVolume; }
+    
     virtual G4VPhysicalVolume *Construct();
     
 private:
@@ -32,6 +34,8 @@ private:
     virtual void ConstructSDandField();
     
     G4GenericMessenger *fMessenger;
+    
+    G4LogicalVolume *fScoringVolume;
     
     G4int nRows, nCols;
 };
