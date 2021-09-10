@@ -1,9 +1,7 @@
 #include "run.hh"
 
 MyRunAction::MyRunAction()
-{
-    edep = 0.;
-    
+{   
     G4AnalysisManager *man = G4AnalysisManager::Instance();
 
     man->CreateNtuple("Photons", "Photons");
@@ -20,9 +18,6 @@ MyRunAction::MyRunAction()
     man->CreateNtupleDColumn("fY");
     man->CreateNtupleDColumn("fZ");
     man->FinishNtuple(1);
-    
-    G4AccumulableManager* accumulableManager = G4AccumulableManager::Instance();
-    accumulableManager->RegisterAccumulable(edep);
 }
 
 MyRunAction::~MyRunAction()
