@@ -64,12 +64,11 @@ void MyDetectorConstruction::DefineMaterials()
     NaI->AddElement(Na, 1);
     NaI->AddElement(I, 1);
     
-    G4double photonEnergy[2] = {1.239841939*eV/0.2, 1.239841939*eV/0.9};
     G4double fraction[2] = {1.0, 1.0};
     
     G4MaterialPropertiesTable *mptNaI = new G4MaterialPropertiesTable();
     mptNaI->AddProperty("RINDEX", energy, rindexNaI, 2);
-    mptNaI->AddProperty("FASTCOMPONENT", photonEnergy, fraction, 2);
+    mptNaI->AddProperty("FASTCOMPONENT", energy, fraction, 2);
     mptNaI->AddConstProperty("SCINTILLATIONYIELD",38./keV);
     mptNaI->AddConstProperty("RESOLUTIONSCALE",1.0);
     mptNaI->AddConstProperty("FASTTIMECONSTANT", 250.*ns);
