@@ -48,6 +48,7 @@ void MyDetectorConstruction::DefineMaterials()
     G4double energy[2] = {1.239841939*eV/0.2, 1.239841939*eV/0.9};
     G4double rindexAerogel[2] = {1.1, 1.1};
     G4double rindexWorld[2] = {1.0, 1.0};
+    G4double rindexNaI[2] = {1.78, 1.78};
     
     G4MaterialPropertiesTable *mptAerogel = new G4MaterialPropertiesTable();
     mptAerogel->AddProperty("RINDEX", energy, rindexAerogel, 2);
@@ -63,18 +64,70 @@ void MyDetectorConstruction::DefineMaterials()
     NaI->AddElement(Na, 1);
     NaI->AddElement(I, 1);
     
+    G4double photonEnergy[2] = {1.239841939*eV/0.2, 1.239841939*eV/0.9};
+    G4double fraction[2] = {1.0, 1.0};
+    
+    G4MaterialPropertiesTable *mptNaI = new G4MaterialPropertiesTable();
+    mptNaI->AddProperty("RINDEX", energy, rindexNaI, 2);
+    mptNaI->AddProperty("FASTCOMPONENT", photonEnergy, fraction, 2);
+    mptNaI->AddConstProperty("SCINTILLATIONYIELD",38./keV);
+    mptNaI->AddConstProperty("RESOLUTIONSCALE",1.0);
+    mptNaI->AddConstProperty("FASTTIMECONSTANT", 250.*ns);
+    mptNaI->AddConstProperty("YIELDRATIO",1.);
+    NaI->SetMaterialPropertiesTable(mptNaI);
+    
     worldMat->SetMaterialPropertiesTable(mptWorld);
+    
+    mirrorSurface = new G4OpticalSurface("mirrorSurface");
+    
+    G4double reflectivity[2] = {1.0, 1.0};
+    
+    G4MaterialPropertiesTable *mptMirror = new G4MaterialPropertiesTable();
+    mptMirror->AddProperty("REFLECTIVITY", energy, reflectivity, 2);
+
+    mirrorSurface->SetMaterialPropertiesTable(mptMirror);
 }
 
 void MyDetectorConstruction::ConstructScintillator()
 {
-    solidScintillator = new G4Tubs("solidScintillator", 10*cm, 20*cm, 30*cm, 0*deg, 360*deg);
+    solidScintillator = new G4Box("solidScintillator", 5*cm, 5*cm, 6*cm);
     
     logicScintillator = new G4LogicalVolume(solidScintillator, NaI, "logicalScintillator");
     
     fScoringVolume = logicScintillator;
     
-    physScintillator = new G4PVPlacement(0, G4ThreeVector(0., 0., 0.), logicScintillator, "physScintillator", logicWorld, false, 0, true);
+    solidDetector = new G4Box("solidDetector", 1.*cm, 5.*cm, 6*cm);
+    
+    logicDetector = new G4LogicalVolume(solidDetector, worldMat, "logicDetector");
+    
+    solidBox = new G4Box("solidBox", 5*cm, 5.1*cm, 6.1*cm);
+    
+    solidHousing = new G4SubtractionSolid("solidHousing", solidBox, solidScintillator);
+    
+    logicHousing = new G4LogicalVolume(solidHousing, worldMat, "logicHousing");
+    
+    for(G4int i = 0; i < 6; i++)
+    {
+        for(G4int j = 0; j < 16; j++)
+        {
+            G4Rotate3D rotZ(j*22.5*deg, G4ThreeVector(0,0,1));
+            G4Translate3D transX(G4ThreeVector(5./tan(22.5/2*deg)*cm+6.*cm, 0.*cm, -40.*cm + i*15*cm));
+            G4Transform3D transform = (rotZ)*(transX);
+            
+            G4Translate3D transX2(G4ThreeVector(5./tan(22.5/2*deg)*cm+12.*cm, 0.*cm, -40.*cm + i*15*cm));
+            G4Transform3D transform2 = (rotZ)*(transX2);
+            
+            physHousing = new G4PVPlacement(transform, logicHousing, "physHousing", logicWorld, false, 0, true);
+            
+            physScintillator = new G4PVPlacement(transform, logicScintillator, "physScintillator", logicWorld, false, 0, true);
+            
+            physDetector = new G4PVPlacement(transform2, logicDetector, "physDetector", logicWorld, false, 0, true);
+            
+            G4LogicalBorderSurface *borderSurface = new G4LogicalBorderSurface("borderSurface", physHousing, physScintillator, mirrorSurface);
+            
+            G4LogicalBorderSurface *borderSurface2 = new G4LogicalBorderSurface("borderSurface2", physScintillator, physHousing, mirrorSurface);
+        }
+    }
 }
 
 void MyDetectorConstruction::ConstructCherenkov()
@@ -121,6 +174,6 @@ void MyDetectorConstruction::ConstructSDandField()
 {
     MySensitiveDetector *sensDet = new MySensitiveDetector("SensitiveDetector");
     
-    if(isCherenkov)
+    if(logicDetector != NULL)
         logicDetector->SetSensitiveDetector(sensDet);
 }

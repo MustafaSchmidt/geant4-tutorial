@@ -10,6 +10,9 @@
 #include "G4NistManager.hh"
 #include "G4SystemOfUnits.hh"
 #include "G4GenericMessenger.hh"
+#include "G4OpticalSurface.hh"
+#include "G4LogicalBorderSurface.hh"
+#include "G4SubtractionSolid.hh"
 
 #include "detector.hh"
 
@@ -26,10 +29,12 @@ public:
     void ConstructScintillator();
     
 private:
-    G4Box *solidWorld, *solidRadiator, *solidDetector;
-    G4Tubs *solidScintillator;
-    G4LogicalVolume *logicWorld, *logicRadiator, *logicDetector, *logicScintillator;
-    G4VPhysicalVolume *physWorld, *physDetector, *physRadiator, *physScintillator;
+    G4Box *solidWorld, *solidRadiator, *solidDetector, *solidScintillator, *solidBox;
+    G4SubtractionSolid *solidSubtract, *solidHousing;
+    G4LogicalVolume *logicWorld, *logicRadiator, *logicDetector, *logicScintillator, *logicHousing;
+    G4VPhysicalVolume *physWorld, *physDetector, *physRadiator, *physScintillator, *physHousing;
+    
+    G4OpticalSurface *mirrorSurface;
     
     G4Material *SiO2, *H2O, *Aerogel, *worldMat, *NaI;
     G4Element *C, *Na, *I;
