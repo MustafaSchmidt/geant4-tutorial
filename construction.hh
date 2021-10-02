@@ -12,7 +12,7 @@
 #include "G4GenericMessenger.hh"
 #include "G4OpticalSurface.hh"
 #include "G4LogicalBorderSurface.hh"
-#include "G4SubtractionSolid.hh"
+#include "G4LogicalSkinSurface.hh"
 
 #include "detector.hh"
 
@@ -21,35 +21,34 @@ class MyDetectorConstruction : public G4VUserDetectorConstruction
 public:
     MyDetectorConstruction();
     ~MyDetectorConstruction();
-    
+
     G4LogicalVolume *GetScoringVolume() const { return fScoringVolume; }
-    
+
     virtual G4VPhysicalVolume *Construct();
     void ConstructCherenkov();
     void ConstructScintillator();
-    
+
 private:
-    G4Box *solidWorld, *solidRadiator, *solidDetector, *solidScintillator, *solidBox;
-    G4SubtractionSolid *solidSubtract, *solidHousing;
-    G4LogicalVolume *logicWorld, *logicRadiator, *logicDetector, *logicScintillator, *logicHousing;
-    G4VPhysicalVolume *physWorld, *physDetector, *physRadiator, *physScintillator, *physHousing;
-    
+    G4Box *solidWorld, *solidRadiator, *solidDetector, *solidScintillator;
+    G4LogicalVolume *logicWorld, *logicRadiator, *logicDetector, *logicScintillator;
+    G4VPhysicalVolume *physWorld, *physDetector, *physRadiator, *physScintillator;
+
     G4OpticalSurface *mirrorSurface;
-    
+
     G4Material *SiO2, *H2O, *Aerogel, *worldMat, *NaI;
     G4Element *C, *Na, *I;
-    
+
     void DefineMaterials();
     virtual void ConstructSDandField();
-    
+
     G4GenericMessenger *fMessenger;
-    
+
     G4LogicalVolume *fScoringVolume;
-    
+
     G4int nRows, nCols;
-    
+
     G4double xWorld, yWorld, zWorld;
-    
+
     G4bool isCherenkov, isScintillator;
 };
 
