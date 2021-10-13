@@ -27,6 +27,7 @@ public:
     virtual G4VPhysicalVolume *Construct();
     void ConstructCherenkov();
     void ConstructScintillator();
+    void ConstructTOF();
 
 private:
     G4Box *solidWorld, *solidRadiator, *solidDetector, *solidScintillator;
@@ -49,7 +50,7 @@ private:
 
     G4double xWorld, yWorld, zWorld;
 
-    G4bool isCherenkov, isScintillator;
+    G4bool isCherenkov, isScintillator, isTOF;
 };
 
 #endif

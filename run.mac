@@ -1,3 +1,6 @@
 /run/numberOfThreads 8
 /run/initialize
-/run/beamOn 10
+/gun/momentumAmp 1 GeV
+/gun/position 0 0 -5 m
+/gun/particle pi+
+/run/beamOn 100
