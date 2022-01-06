@@ -28,6 +28,7 @@ public:
     void ConstructCherenkov();
     void ConstructScintillator();
     void ConstructTOF();
+    void ConstructAtmosphere();
 
 private:
     G4Box *solidWorld, *solidRadiator, *solidDetector, *solidScintillator;
