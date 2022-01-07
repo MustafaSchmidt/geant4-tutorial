@@ -31,13 +31,13 @@ public:
     void ConstructAtmosphere();
 
 private:
-    G4Box *solidWorld, *solidRadiator, *solidDetector, *solidScintillator;
-    G4LogicalVolume *logicWorld, *logicRadiator, *logicDetector, *logicScintillator;
-    G4VPhysicalVolume *physWorld, *physDetector, *physRadiator, *physScintillator;
+    G4Box *solidWorld, *solidRadiator, *solidDetector, *solidScintillator, *solidAir;
+    G4LogicalVolume *logicWorld, *logicRadiator, *logicDetector, *logicScintillator, *logicAir[10];
+    G4VPhysicalVolume *physWorld, *physDetector, *physRadiator, *physScintillator, *physAir[10];
 
     G4OpticalSurface *mirrorSurface;
 
-    G4Material *SiO2, *H2O, *Aerogel, *worldMat, *NaI;
+    G4Material *SiO2, *H2O, *Aerogel, *worldMat, *NaI, *Air[10];
     G4Element *C, *Na, *I;
 
     void DefineMaterials();
@@ -51,7 +51,7 @@ private:
 
     G4double xWorld, yWorld, zWorld;
 
-    G4bool isCherenkov, isScintillator, isTOF;
+    G4bool isCherenkov, isScintillator, isTOF, isAtmosphere;
 };
 
 #endif
