@@ -193,7 +193,7 @@ void MyDetectorConstruction::ConstructAtmosphere()
     {
         logicAir[i] = new G4LogicalVolume(solidAir, Air[i], "logicAir");
 
-        physAir[i] = new G4PVPlacement(0, G4ThreeVector(0, 0, zWorld/10.*i - zWorld), logicAir[i], "physAir", logicWorld, false, i, true);
+        physAir[i] = new G4PVPlacement(0, G4ThreeVector(0, 0, zWorld/10.*2*i - zWorld + zWorld/10.), logicAir[i], "physAir", logicWorld, false, i, true);
     }
 }
 
