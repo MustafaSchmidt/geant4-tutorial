@@ -120,7 +120,7 @@ para realizar a instalação (esse comando deve executar mais rápido).
 Após isso, é necessário rodar o comando de source para poder garantir que a localidade dos arquivos seja encontrada. No caso, vale mais a pena adicionar ao final do arquivo `~/.bashrc`:
 
 ```bash
-. /home/$USER_NAME_HERE$/geant4/geant4-11.0.3-install/share/Geant-11.0.3/geant4make/geant4make.sh
+. ~/geant4/geant4-11.0.3-install/share/Geant4-11.0.3/geant4make/geant4make.sh
 ```
 
 </br>
