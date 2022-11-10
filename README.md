@@ -45,7 +45,7 @@ Você pode baixar a última versão do código pelo próprio GitHub [aqui](https
 
 
 
-## 3. Passo-a-passo para a instalação
+## 3. Passo-a-passo para a instalação (single-thread)
 Recomenda-se criar um folder para a instalação do Geant4. Isso servirá para poder controlar múltiplas versões instaladas (tanto de diferentes releases 
 como de diferentes builds -- ex.: single vs multithread) e servirá também para deletá-las mais facilmente, caso precise.
 
@@ -65,6 +65,27 @@ Caso não tenha baixado, pode baixar e descompactar o arquivo-fonte aqui mesmo (
 wget -c https://github.com/Geant4/geant4/archive/refs/tags/v11.0.3.tar.gz
 
 tar -xzvf v11.0.3.tar.gz
+
+cd geant4-11.0.3
 ```
 
+Para iniciar o build:
 
+```
+mkdir build
+
+cd build
+
+ccmake ..
+```
+
+Na tela do terminal, aperte `c` para configurar (algumas mensagens vão aparecer, mas, se não houver nenhum erro, podemos prosseguir) e depois `e`.
+
+Escolha as opções que deseja alterar. No caso, pressionando `Enter` para modificar as configurações, recomendamos que 
+
+(a) Modifique o campo de `CMAKE_INSTALL_PREFIX` para um folder ao lado da versão baixada:
+```
+/home/$USER_NAME_HERE$/geant4/geant4-11.0.3-install/
+```
+
+(b) Modifique a opção de `GEANT4_BUILD_MULTITHREADED` para `OFF` (recomendamos uma [outra instalação](https://github.com/jhapreis/geant4-tutorial/edit/master/README.md) para habilitar multithreads).
