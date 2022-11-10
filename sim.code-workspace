@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"editor.fontFamily": "Consolas, 'Courier New', monospace",
+		"editor.codeLensFontFamily": "Consolas, 'Courier New', monospace",
+		"files.associations": {
+			"*.m": "matlab",
+			"*.icc": "cpp",
+			"line": "cpp",
+			"plane": "cpp",
+			"*.tcc": "cpp",
+			"bitset": "cpp",
+			"functional": "cpp",
+			"future": "cpp",
+			"valarray": "cpp"
+		}
+	}
+}
