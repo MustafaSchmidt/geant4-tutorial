@@ -8,7 +8,7 @@
 #include "G4UIExecutive.hh"
 #include "QGSP_BERT.hh"
 
-#include "construction.hh"
+#include "scintillator.hh"
 #include "physics.hh"
 #include "action.hh"
 
@@ -22,7 +22,7 @@ int main(int argc, char** argv)
       G4RunManager* runManager = new G4RunManager;
     #endif
 
-    runManager->SetUserInitialization(new MyDetectorConstruction());
+    runManager->SetUserInitialization(new ScintillatorConstruction());
     runManager->SetUserInitialization(new MyPhysicsList());
     runManager->SetUserInitialization(new MyActionInitialization());
 
@@ -30,18 +30,14 @@ int main(int argc, char** argv)
     physics->RegisterPhysics(new G4DecayPhysics());
     runManager->SetUserInitialization(physics);
 
-    if (argc == 1)
-    {
-        ui = new G4UIExecutive(argc, argv);
-    }
-
     G4VisManager *visManager = new G4VisExecutive();
     visManager->Initialize();
 
     G4UImanager *UImanager = G4UImanager::GetUIpointer();
 
-    if(ui)
-    {
+    if(argc == 1)
+    { 
+        ui = new G4UIExecutive(argc, argv);
         UImanager->ApplyCommand("/control/execute vis.mac");
         ui->SessionStart();
     }
