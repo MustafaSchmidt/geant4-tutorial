@@ -16,14 +16,14 @@ MySensitiveDetector::MySensitiveDetector(G4String name) : G4VSensitiveDetector(n
         if(datafile.eof())
             break;
 
-        G4cout << wlen << " " << queff << std::endl;
+        // G4cout << wlen << " " << queff << std::endl;
 
         quEff->InsertValues(wlen, queff/100.);
     }
 
     datafile.close();
 
-    quEff->SetSpline(false);
+    // quEff->SetSpline(false);
 }
 
 MySensitiveDetector::~MySensitiveDetector()

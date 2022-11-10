@@ -197,7 +197,7 @@ void MyDetectorConstruction::ConstructAtmosphere()
     }
 }
 
-G4VPhysicalVolume *MyDetectorConstruction::Construct()
+G4VPhysicalVolume *MyDetectorConstruction::Construct_World()
 {
     solidWorld = new G4Box("solidWorld", xWorld, yWorld, zWorld);
 

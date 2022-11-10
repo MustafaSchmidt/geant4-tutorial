@@ -22,9 +22,11 @@ public:
     MyDetectorConstruction();
     ~MyDetectorConstruction();
 
-    G4LogicalVolume *GetScoringVolume() const { return fScoringVolume; }
+    G4LogicalVolume* GetScoringVolume() const { 
+        return fScoringVolume; 
+    }
 
-    virtual G4VPhysicalVolume *Construct();
+    virtual G4VPhysicalVolume *Construct_World();
     void ConstructCherenkov();
     void ConstructScintillator();
     void ConstructTOF();
